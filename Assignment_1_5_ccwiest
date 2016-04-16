@@ -1,0 +1,154 @@
+Assignment 1.5
+==============
+
+# Template for Sequence Alignment Assignment (20 pts possible)
+
+__Full Name:__ Caitlin Clark-Wiest		
+
+__Student ID:__ 912369305
+
+*_Please answer the following questions which are each worth 1 point unless otherwise indicated. Be clear and concise with any written answers. Graphs should be properly constructed (axis labels, units, titles, etc.)_*
+
+__1.__ How do you know that when you use `shuffleseq` the sequences have the same exact composition?
+> Use diff command to show the differences between the actual and the shuffled sequences. (If no difference then nothing should show after running this command)
+
+<pre><code> diff ce1.comp ce1.shuffle.comp </code></pre>
+
+__2.__ Create a text based "histogram" as desribed in the lab manual
+that shows the distribution of scores when aligning shuffled sequences.
+Why is the shape of the curve not quite normal?
+
+<pre><code>
+Freq  Score
+1     25.0 
+5     26.0
+21    27.0 
+41    28.0  
+74    29.0
+91    30.0
+106   31.0
+115   32.0
+91    33.0
+80    34.0
+79    35.0
+79    36.0
+43    37.0
+35    38.0
+26    39.0
+27    40.0
+21    41.0
+18    42.0
+9     43.0
+16    44.0
+9     45.0
+6     46.0
+1     47.0
+2     48.0
+1     49.0
+1     52.0
+1     53.0
+1     57.0
+</code></pre>
+
+
+
+            
+
+>Curve is not a normal distribution because there is a greater statisical likelihood of shorter sequences aligning by random chance than longer sequences. Therefore the curve is skewed to the right.
+
+__3.__ What would be the effect of doing 1,000,000 shuffled sequences?
+
+
+>The histogram would be skewed even further to the right because the more we shuffle and align these sequences we inscrease the likelyhood of better scoreing alignments that would occur by random chance. (They still occur at low frequency, hence the long tail to the right of the histogram.) 
+
+__4.__ Briefly discuss the relationship of sequence length and score.
+
+>The longer the sequence the lower the score, *generally*, because there is a lower likelyhood of alignment by random chance.
+
+
+__5.__ Starting with the C. elegans B0213.10 protein, find the best
+match in the A. thaliana and D. melanogaster proteomes with `water`.
+Record their alignment scores, percent identities, and protein names
+here.
+
+
+
+__C. elegans B0213.10 & A. thaliana proteome:__
+> Best Alignment Score: 337.0
+Protein names
+ 1: B0213.10
+ 2: AT2G23190.1
+
+
+
+
+__C. elegans B0213.10 & D.melanogaster proteome:__
+
+> Best Alignment Score: 333.0
+Protein names
+ 1: B0213.10
+2: FBpp0074380le
+
+
+
+
+__6.__ What is the expected (average) score of each pairwise alignment
+at random? (Perform some shuffled alignments to get an idea of what the
+random expectation is).
+
+>Scores from random alignment: 32, 34, 34, 34, 33, 32
+
+>For EBLOSUM 62 -gapopen 10 -gapextend  5 and two proteins [one at and one dm] shuffled x1000 times each then aligned; Mode =32 
+
+
+
+__7.__ How many Z-scores away from the mean is the best alignment?
+
+Average = 39.2068965517241
+Standard Deviation = 8.83329460598134
+
+
+z score = (value of best score - population mean) / std dev
+
+z = (55 - 39.206896551724) /  8.83329460598134
+
+z = 1.78790645929
+
+
+
+
+__8.__ Briefly discuss the statistical and biological significance of your results.
+
+Statisically, aligning sequences over and over again increases the likelihood of alignment by random chance. Shuffling increases that likelihood yet again. This calls for those using these statistical tools to calculate or set a threshold to determine significance of alignment.  
+
+Biologically, our score of the best alignment between the two shuffled proteins showed to be a little less than two standard deviations away from the mean. Even though these two protein sequences are "fake or random" they appear to have sequence similarity. This should be taken into account when inferring relatedness between organisms. 
+ 
+__9.__ Approximately how long would it take to compare two proteomes using `water`?
+
+<pre><code>time water dm1.fa aprotein.fa -gapopen 10 -gapextend 5 -outfile dm1Aproteome.water</code></pre>
+
+
+>Smith-Waterman local alignment of sequences:
+
+>real	        2m50.420s
+user	2m49.909s
+sys	        0m0.361s
+
+>AA in A.thaliana proteome =  14482855
+AA in D.melanogaster protein = 683
+time=230 seconds
+
+
+>(AA D.m protein)(AA in A.thaliana proteome)
+(683)(14482855)= 9891789965
+
+>9891789965/(230 seconds)= 43007782.4565 (AA/sec)
+
+>AA in D.melanogaster proteome =19981113
+AA in A.thaliana proteome =  14482855
+
+>(19981113)(14482855)= 2.8938356e+14
+
+ >43007782.4565 (AA/1 sec) =  2.8938356e+14 (AA/time)
+
+>Time = 6728632.43513 seconds = **77.87769 Days**
