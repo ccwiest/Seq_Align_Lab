@@ -7,8 +7,8 @@ __Full Name:__ Caitlin Clark-Wiest
 
 __Student ID:__ 912369305
 
-
 *_Please answer the following questions which are each worth 1 point unless otherwise indicated. Be clear and concise with any written answers. Graphs should be properly constructed (axis labels, units, titles, etc.)_*
+
 
 __1.__ How do you know that when you use `shuffleseq` the sequences have the same exact composition?
 > Use diff command to show the differences between the actual and the shuffled sequences. (If no difference then nothing should show after running this command)
